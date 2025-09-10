@@ -31,7 +31,7 @@ PRODUCTION = os.getenv("PRODUCTION", "False").lower() == 'true';
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["valerian-hizkia-kick-street.pbp.cs.ui.ac.id"]
 
 
 # Application definition
