@@ -24,7 +24,8 @@ Penggunaan file static juga dijelaskan di dokumentasi Django dengan menambahkan 
 ### f. Routing
 Dilakukan dengan menambahkan file ```urls.py``` pada aplikasi ```main``` dan mendaftarkannya di file ```urls.py``` pada direktori projek utama di ```kick_street```
 
-
+### g. PWS
+Deploy ke PWS dengan meng-push ke remote PWS yang telah disediakan sebelumnya.
 
 ## Helpful URLs
 https://docs.djangoproject.com/en/5.2/
