@@ -1,6 +1,6 @@
-from http.client import HTTPResponse
 from django.shortcuts import render
 from django.core import serializers
+from django.http import HttpResponse
 from main.models import Product
 
 def show_main(request):
@@ -17,31 +17,31 @@ def show_products_xml(request):
 
     data = serializers.serialize("xml", products)
 
-    return HTTPResponse(data, content_type="application/xml")
+    return HttpResponse(data, content_type="application/xml")
 
 def show_products_json(request):
     products = Product.objects.all()
 
     data = serializers.serialize("json", products)
 
-    return HTTPResponse(data, content_type="application/json")
+    return HttpResponse(data, content_type="application/json")
 
-def show_product_xml_by_id(request, id):
+def show_product_xml_by_id(request, product_id):
     try:
-        product = Product.objects.filter(pk=id)
+        product = Product.objects.filter(pk=product_id)
 
         data = serializers.serialize("xml", product)
 
-        return HTTPResponse(data, content_type="application/xml")
+        return HttpResponse(data, content_type="application/xml")
     except Product.DoesNotExist:
-        return HTTPResponse(status=404)
+        return HttpResponse(status=404)
 
-def show_product_json_by_id(request, id):
+def show_product_json_by_id(request, product_id):
     try:
-        product = Product.objects.filter(pk=id)
+        product = Product.objects.filter(pk=product_id)
 
         data = serializers.serialize("json", product)
 
-        return HTTPResponse(data, content_type="application/json")
+        return HttpResponse(data, content_type="application/json")
     except Product.DoesNotExist:
-        return HTTPResponse(status=404)
+        return HttpResponse(status=404)
