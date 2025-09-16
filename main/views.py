@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core import serializers
 from django.http import HttpResponse
+from main.forms import ProductForm
 from main.models import Product
 
 def show_main(request):
@@ -11,6 +12,18 @@ def show_main(request):
     }
 
     return render(request, "main.html", context)
+
+def show_create_product(request):
+    form = ProductForm(request.POST)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+
+        return redirect("main:show_main")
+    
+    context = {"form": form}
+
+    return render(request, "create_product.html", context)
 
 def show_products_xml(request):
     products = Product.objects.all()
