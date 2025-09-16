@@ -5,13 +5,25 @@ from main.forms import ProductForm
 from main.models import Product
 
 def show_main(request):
+    products = Product.objects.all()
+
     context = {
         "title": "Kick St.",
         "name": "Valerian Hizkia Emmanuel",
         "class": "PBP E",
+        "products": products,
     }
 
     return render(request, "main.html", context)
+
+def show_product(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+
+    context = {
+        "product": product
+    }
+
+    return render(request, "product_detail.html", context)
 
 def show_create_product(request):
     form = ProductForm(request.POST)
