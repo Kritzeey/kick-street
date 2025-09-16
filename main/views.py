@@ -26,7 +26,7 @@ def show_products_json(request):
 
     return HTTPResponse(data, content_type="application/json")
 
-def show_products_xml_by_id(request, id):
+def show_product_xml_by_id(request, id):
     try:
         product = Product.objects.filter(pk=id)
 
@@ -36,7 +36,7 @@ def show_products_xml_by_id(request, id):
     except Product.DoesNotExist:
         return HTTPResponse(status=404)
 
-def show_products_json_by_id(request, id):
+def show_product_json_by_id(request, id):
     try:
         product = Product.objects.filter(pk=id)
 
