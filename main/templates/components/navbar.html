@@ -2,15 +2,23 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
-    <nav class="w-full fixed top-0 h-12 z-50 border-b border-black/40 bg-white">
+    <nav class="w-full fixed top-0 h-12 z-50 bg-white">
         <div class="max-w-4xl h-full mx-auto flex items-center justify-between">
-            <a href="/" class="font-bold text-red-300">
+            <a href="{% url 'main:show_main' %}" class="font-bold text-red-300">
                 {{ title }}
             </a>
 
-            <a href="https://github.com/Kritzeey/kick-street">
-                <img height="32" width="32" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" />
-            </a>
+            <div class="flex gap-4 h-full items-center">
+                <a href="{% url 'main:show_create_product' %}">
+                    <div class="p-2 bg-red-300 text-white rounded">
+                        Add your product
+                    </div>
+                </a>
+
+                <a href="https://github.com/Kritzeey/kick-street">
+                    <img height="32" width="32" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" />
+                </a>
+            </div>
         </div>
     </nav>
 </body>
