@@ -9,6 +9,7 @@ class Product(models.Model):
     description = models.TextField()
     thumbnail = models.URLField()
     price = models.IntegerField()
+    stock = models.IntegerField()
     is_featured = models.BooleanField()
 
     def __str__(self):
