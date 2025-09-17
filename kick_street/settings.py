@@ -76,6 +76,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'kick_street.wsgi.application'
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://valerian-hizkia-kick-street.pbp.cs.ui.ac.id/'
+]
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
