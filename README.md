@@ -96,6 +96,8 @@ Sedangkan ```{% csrf_token %}``` berfungsi untuk menghindari serangan <i>cross-s
 
 Hal ini dilakukan dengan menaruh <i>cookie</i> CSRF pada <i>browser</i> pengguna. <i>cookie</i> ini nantinya akan dikirimkan bersamaan dengan <i>form</i> yang dikirim oleh pengguna. Jika tidak ada atau token tidak valid, akan dikirimkan status 403.
 
+## Step-by-step implementation
+
 ## Postman
 
 JSON - All Products
@@ -109,3 +111,21 @@ XML - ALL Products
 
 XML - Product By Id
 <img src="images/xml_by_id.png">
+
+# ❓ Assignment 4 Questions
+
+## AuthenticationForm?
+
+```AuthenticationForm``` adalah sebuah form yang telah disediakan oleh Django itu sendiri. ```AuthenticationForm``` biasa digunakan untuk membuat form autentikasi. Dalam projek ini digunakan untuk <i>login</i>.
+
+## Difference between authentication and authorization
+
+Autentikasi adalah suatu proses menentukan apakah pengguna yang <i>login</i> adalah orang yang benar. Hal ini dilakukan dengan <i>session</i> dan <i>cookies</i>.
+
+Autorisasi adalah suatu proses dimana sistem mengecek <i>permission</i> yang dimiliki oleh seorang pengguna. Hal ini dilakukan agar akses sebuah pengguna dibatasi.
+
+## Kelebihan dan kekurangan session dan cookies
+
+## Apakah cookie aman secara default?
+
+## Step-by-step implementation
