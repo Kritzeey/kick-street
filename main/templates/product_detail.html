@@ -16,4 +16,10 @@
     <p>
         Description: {{ product.description }}
     </p>
+
+    {% if product.user %}
+        <p>Seller: {{ product.user.username }} </p>
+    {% else %}
+        <p>Seller: anonymous</p>
+    {% endif %}
 </div>

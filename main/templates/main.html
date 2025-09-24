@@ -11,6 +11,24 @@
         <button>Add Product</button>
     </a>
 
+    <a href="{% url 'main:show_logout' %}">
+       <button>Logout</button>
+    </a>
+
+    <h5>Last login session: {{ last_login }}</h5>
+
+    <h5>Current user: {{ current_user }}</h5>
+
+    <hr>
+
+    <a href="?filter=all">
+        <button type="button">All Products</button>
+    </a>
+
+    <a href="?filter=my">
+        <button type="button">My Products</button>
+    </a> 
+
     {% if not products %}
         <p>
             No products yet
