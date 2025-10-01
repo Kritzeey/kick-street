@@ -1,63 +1,80 @@
-<main>
-    <p>
-        App name: {{ title }}
-    </p>
+{% extends 'base.html' %}
 
-    <p>
-        Made by: {{ name }} from {{ class }}
-    </p>
+{% load static %}
 
-    <a href="{% url 'main:show_create_product' %}">
-        <button>Add Product</button>
-    </a>
+{% block content %}
+    <main class="relative flex justify-center w-full min-h-dvh">
+        {% include 'partials/navbar.html' %}
 
-    <a href="{% url 'main:show_logout' %}">
-       <button>Logout</button>
-    </a>
+        <section class="relative border-b h-[75dvh] w-full overflow-hidden w-full mt-16">
+            <img class="absolute w-full h-full object-cover" src="{% static 'images/football_field.png' %}" alt="Football Field" >
+        
+            <div class="absolute inset-0 z-50 flex">
+                <div class="max-w-6xl mx-auto w-full flex justify-center flex-col gap-8">
+                    <div class="flex flex-col gap-2">
+                        <p class="text-white text-6xl">Your one stop shop</p>
+                        <p class="text-white text-6xl">for your <span class="text-green-400">kicking</span> needs</p>
+                    </div>
 
-    <h5>Last login session: {{ last_login }}</h5>
+                    <button class="bg-black text-white p-4 w-32">
+                        See All Products
+                    </button>
+                </div>
+            </div>
+        </section>
 
-    <h5>Current user: {{ current_user }}</h5>
+        <!-- <div class="mt-24">
+            <div>
+                <p>
+                    Made by: {{ name }} from {{ class }}
+                </p>
+                
+                <h5>Last login session: {{ last_login }}</h5>
+                
+                <h5>Current user: {{ current_user }}</h5>
+            </div>
 
-    <hr>
-
-    <a href="?filter=all">
-        <button type="button">All Products</button>
-    </a>
-
-    <a href="?filter=my">
-        <button type="button">My Products</button>
-    </a> 
-
-    {% if not products %}
+        <hr> -->
+        
+        <!-- <a href="?filter=all">
+            <button type="button">All Products</button>
+        </a>
+        
+        <a href="?filter=my">
+            <button type="button">My Products</button>
+        </a> 
+        
+        {% if not products %}
         <p>
             No products yet
         </p>
-    {% else %}
+        {% else %}
         <hr>
-
+        
         <div>
             {% for product in products %}
-                {% if product.is_featured %}
+                    {% if product.is_featured %}
                     Featured Product
+                    {% endif %}
+                    
+                    <a href="{% url 'main:show_product' product.id %}">
+                        <div>
+                            <img src="{{ product.thumbnail }}" height="100" width="100">
+                            
+                            <p>
+                                {{ product.name }}
+                            </p>
+                            
+                            <p>
+                                ${{ product.price }}
+                            </p>
+                            
+                            <hr>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
                 {% endif %}
-
-                <a href="{% url 'main:show_product' product.id %}">
-                    <div>
-                        <img src="{{ product.thumbnail }}" height="100" width="100">
-                        
-                        <p>
-                            {{ product.name }}
-                        </p>
-                        
-                        <p>
-                            ${{ product.price }}
-                        </p>
-                        
-                        <hr>
-                    </div>
-                </a>
-            {% endfor %}
-        </div>
-    {% endif %}
-</main>
+            </main>
+        </div> -->
+{% endblock content %}

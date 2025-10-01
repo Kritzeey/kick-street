@@ -1,0 +1,15 @@
+<header class="fixed z-50 w-full flex h-16 bg-black text-white">
+    <nav class="w-full max-w-6xl mx-auto flex items-center justify-between">
+        <a class="cursor-pointer font-bold text-2xl">Kick Street</a>
+
+        <div class="flex items-center justify-between gap-4">
+            <a href="{% url 'main:show_create_product' %}">
+                <button>Add Product</button>
+            </a>
+            
+            <a href="{% url 'main:show_logout' %}">
+                <button>Logout</button>
+            </a>
+        </div>
+    </nav>
+</header>
