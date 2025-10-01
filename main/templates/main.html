@@ -3,13 +3,14 @@
 {% load static %}
 
 {% block content %}
-    <main class="relative flex justify-center w-full min-h-dvh">
-        {% include 'partials/navbar.html' %}
+    {% include 'partials/navbar.html' %}
+
+    <main class="relative flex justify-center w-full min-h-dvh flex-col">
 
         <section class="relative border-b h-[75dvh] w-full overflow-hidden w-full mt-16">
             <img class="absolute w-full h-full object-cover" src="{% static 'images/football_field.png' %}" alt="Football Field" >
         
-            <div class="absolute inset-0 z-50 flex">
+            <div class="absolute inset-0 z-10 flex">
                 <div class="max-w-6xl mx-auto w-full flex justify-center flex-col gap-8">
                     <div class="flex flex-col gap-2">
                         <p class="text-white text-6xl">Your one stop shop</p>
@@ -20,6 +21,20 @@
                         See All Products
                     </button>
                 </div>
+            </div>
+        </section>
+
+        <section class="min-h-[75dvh] w-full flex items-center justify-center flex-col gap-8">
+            <div class="text-4xl font-bold">
+                Featured Products
+            </div>
+
+            <div class="grid grid-cols-4 w-full max-w-6xl mx-auto">
+                {% for product in products %}
+                    {% if product.is_featured %}
+                        {% include "partials/product_card.html" with product=product %}
+                    {% endif %}
+                {% endfor %}
             </div>
         </section>
 
@@ -35,46 +50,6 @@
             </div>
 
         <hr> -->
-        
-        <!-- <a href="?filter=all">
-            <button type="button">All Products</button>
-        </a>
-        
-        <a href="?filter=my">
-            <button type="button">My Products</button>
-        </a> 
-        
-        {% if not products %}
-        <p>
-            No products yet
-        </p>
-        {% else %}
-        <hr>
-        
-        <div>
-            {% for product in products %}
-                    {% if product.is_featured %}
-                    Featured Product
-                    {% endif %}
-                    
-                    <a href="{% url 'main:show_product' product.id %}">
-                        <div>
-                            <img src="{{ product.thumbnail }}" height="100" width="100">
-                            
-                            <p>
-                                {{ product.name }}
-                            </p>
-                            
-                            <p>
-                                ${{ product.price }}
-                            </p>
-                            
-                            <hr>
-                        </div>
-                    </a>
-                    {% endfor %}
-                </div>
-                {% endif %}
-            </main>
-        </div> -->
+
+    {% include 'partials/footer.html' %}
 {% endblock content %}
