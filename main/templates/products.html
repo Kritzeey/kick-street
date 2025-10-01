@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include 'partials/navbar.html' %}
+
+    <main class="min-h-dvh flex flex-col gap-8 items-center justify-center">
+        <p class="text-4xl font-bold">
+            All Products
+        </p>
+
+        <div class="grid grid-cols-4 max-w-6xl w-full mx-auto gap-4">
+            {% for product in products %}
+                {% include 'partials/product_card.html' with product=product %}
+            {% endfor %}
+        </div>
+    </main>
+{% endblock content %}

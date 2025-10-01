@@ -18,7 +18,7 @@ def show_main(request):
     filter_type = request.GET.get("filter", "all")
 
     if filter_type == "all":
-        product_list = Product.objects.all()
+        product_list = Product.objects.filter(is_featured=True)
     else:
         product_list = Product.objects.filter(user=request.user)
 
@@ -136,3 +136,10 @@ def show_logout(request):
     response.delete_cookie("last_login")
 
     return response
+
+def show_products(request):
+    product_list = Product.objects.all();
+
+    context = { "products": product_list }
+
+    return render(request, "products.html", context)

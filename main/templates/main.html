@@ -16,23 +16,25 @@
                         <p class="text-white text-6xl">Your one stop shop</p>
                         <p class="text-white text-6xl">for your <span class="text-green-400">kicking</span> needs</p>
                     </div>
-
-                    <button class="bg-black text-white p-4 w-32">
-                        See All Products
-                    </button>
+                    
+                    <a href="{% url 'main:show_products' %}">
+                        <button class="bg-black text-white p-4 w-32">
+                            See All Products
+                        </button>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <section class="min-h-[75dvh] w-full flex items-center justify-center flex-col gap-8">
+        <section class="min-h-[75dvh] w-full flex items-center justify-center flex-col gap-20">
             <div class="text-4xl font-bold">
                 Featured Products
             </div>
 
-            <div class="grid grid-cols-4 w-full max-w-6xl mx-auto">
+            <div class="grid grid-cols-4 w-full max-w-6xl mx-auto gap-4">
                 {% for product in products %}
                     {% if product.is_featured %}
-                        {% include "partials/product_card.html" with product=product %}
+                        {% include 'partials/product_card.html' with product=product %}
                     {% endif %}
                 {% endfor %}
             </div>
