@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block content %}
-    <main class="h-dvh w-full flex items-center justify-center">
-        Hello World
+    <main class="min-h-dvh w-full">
+        <section class="h-[75dvh] w-full overflow-hidden">
+            <img class="w-full object-cover" src="{% static 'image/football_field.png' %}" alt="football field">
+        </section>
     </main>
 {% endblock content %}
