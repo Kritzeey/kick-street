@@ -4,8 +4,18 @@
 
 {% block content %}
     <main class="min-h-dvh w-full">
-        <section class="h-[75dvh] w-full overflow-hidden">
-            <img class="w-full object-cover" src="{% static 'image/football_field.png' %}" alt="football field">
+        <section class="h-[75dvh] w-full overflow-hidden relative">
+            <img class="w-full h-full object-cover" src="{% static 'image/football_field.png' %}" alt="football field">
+
+            <div class="absolute inset-0 h-full flex flex-col gap-4 text-6xl text-white justify-center max-w-6xl w-full mx-auto">
+                <p class="text-6xl">
+                    Your one stop shop
+                </p>
+
+                <p class="text-6xl">
+                    For your <span class="text-green-400">kicking</span> needs
+                </p>
+            </div>
         </section>
     </main>
 {% endblock content %}
