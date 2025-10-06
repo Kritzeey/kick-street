@@ -4,6 +4,7 @@ body {
     font-family: "Oswald", sans-serif;
 }
 
-.field-container input {
+.field-container input,
+.field-container textarea {
     border: 1px solid #555;
 }

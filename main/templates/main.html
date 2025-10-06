@@ -27,6 +27,23 @@
                 </div>
             </div>
         </section>
+        <section class="h-[75dvh] w-full flex items-center justify-center flex-col gap-8">
+            {% if products %}
+                <p class="text-4xl">Featured Products</p>
+
+                <div class="grid grid-cols-4 w-full max-w-6xl mx-auto gap-4">
+                    {% for product in products %}
+                        {% include 'partials/product_card.html' with product=product %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-4xl">Featured Products</p>
+
+                <div class="h-64 flex items-center justify-center">
+                    <p class="text-black/40">No Products Yet</p>
+                </div>
+            {% endif %}
+        </section>
     </main>
 
     {% include 'partials/footer.html' %}
