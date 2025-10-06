@@ -5,7 +5,7 @@ class Product(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=255)
     price = models.IntegerField()
-    description = models.TimeField()
+    description = models.TextField()
     thumbnail = models.URLField()
     category = models.CharField(max_length=255)
     is_featured = models.BooleanField()

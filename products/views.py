@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.core import serializers
 
 def show_create_product(request):
-    form = ProductForm(request.POST)
+    form = ProductForm(request.POST or None)
 
     if form.is_valid() and request.method == "POST":
         form.save()
