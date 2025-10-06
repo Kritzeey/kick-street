@@ -9,21 +9,25 @@
         <section class="h-[75dvh] w-full overflow-hidden relative">
             <img class="w-full h-full object-cover" src="{% static 'image/football_field.png' %}" alt="football field">
 
-            <div class="absolute inset-0 h-full flex flex-col gap-4 text-6xl text-white justify-center max-w-6xl w-full mx-auto">
-                <p class="text-6xl">
-                    Your one stop shop
-                </p>
-
-                <p class="text-6xl">
-                    For your <span class="text-green-400">kicking</span> needs
-                </p>
+            <div class="absolute inset-0 h-full flex flex-col gap-8 text-white justify-center max-w-6xl w-full mx-auto">
+                <div class="flex flex-col gap-4">
+                    <p class="text-6xl">
+                        Your one stop shop
+                    </p>
+                    
+                    <p class="text-6xl">
+                        For your <span class="text-green-400">kicking</span> needs
+                    </p>
+                </div>
 
                 <div class="w-full">
-                    <button class="text-xl bg-black p-4">
+                    <button class="bg-black p-4">
                         See All Products
                     </button>
                 </div>
             </div>
         </section>
     </main>
+
+    {% include 'partials/footer.html' %}
 {% endblock content %}
