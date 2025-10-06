@@ -3,3 +3,7 @@
 body {
     font-family: "Oswald", sans-serif;
 }
+
+.field-container input {
+    border: 1px solid #555;
+}
