@@ -1,7 +1,13 @@
+{% load static %}
+
 <header class="w-full z-50 fixed h-16 bg-black text-white">
     <div class="max-w-6xl w-full flex items-center justify-between mx-auto h-full">
-        <a>
-            {{ app_name }}
+        <a class="text-2xl" href="{% url 'main:show_main' %}" >
+            <div class="flex gap-2">
+                <img src="{% static 'image/ball.svg' %}" alt="logo">
+                
+                {{ app_name }}
+            </div>
         </a>
 
         <a class="h-full items-center justify-center flex hover:text-black cursor-pointer duration-200 hover:bg-white px-4">
