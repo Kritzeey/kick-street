@@ -1,27 +1,27 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
 
 {% block content %}
     <main class="min-h-dvh w-full pt-32 flex flex-col gap-16">
-            {% if products %}
-                <div class="flex flex-col gap-8 w-full items-center">
-                    <p class="text-6xl">All Products</p>
+        <div class="flex flex-col gap-8 w-full items-center">
+            <p class="text-6xl">All Products</p>
 
-                    <a href="{% url 'products:show_create_product' %}">
-                        <button class="border-1 border-black text-white bg-black hover:text-black hover:bg-white duration-200 p-2">
-                            Add Your Product
-                        </button>
-                    </a>
-                </div>
-                
-                <div class="grid grid-cols-4 gap-4 mx-auto max-w-6xl w-full">
-                    {% for product in products %}
-                        {% include 'partials/product_card.html' with product=product %}
-                    {% endfor %}
-                </div>
-            {% else %}
-                <p class="text-6xl">All Products</p>
+            <a href="{% url 'products:show_create_product' %}">
+                <button class="border border-black text-white bg-black hover:text-black hover:bg-white duration-200 p-2">
+                    Add Your Product
+                </button>
+            </a>
+        </div>
 
+        {% if products %}
+            <div class="grid grid-cols-4 gap-4 mx-auto max-w-6xl w-full">
+                {% for product in products %} 
+                    {% include 'partials/product_card.html' with product=product %} 
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="flex h-72 items-center justify-center">
                 <p class="text-black/40">No Products Yet</p>
-            {% endif %}
+            </div>
+        {% endif %}
     </main>
 {% endblock %}
