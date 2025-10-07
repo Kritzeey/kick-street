@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from products.forms import ProductForm
 from products.models import Product
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.core import serializers
 from django.contrib.auth.decorators import login_required
 
@@ -28,10 +28,26 @@ def show_create_product(request):
 
 def show_products_json(request):
     products = Product.objects.all()
+    
+    data = [
+        {
+            "id": str(product.id),
+            "user_id": product.user_id,
+            "name": product.name,
+            "price": product.price,
+            "description": product.description,
+            "thumbnail": product.thumbnail,
+            "category": product.category,
+            "is_featured": product.is_featured,
+            "stock": product.stock,
+            "brand": product.brand,
+            "created_at": product.created_at.isoformat() if product.created_at else None,
+        }
+        
+        for product in products
+    ]
 
-    data = serializers.serialize("json", products)
-
-    return HttpResponse(data, content_type="application/json")
+    return JsonResponse(data, safe=False)
 
 def show_products_xml(request):
     products = Product.objects.all()
