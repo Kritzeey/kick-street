@@ -1,0 +1,126 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+    <main class="min-h-dvh w-full pt-32 flex flex-col gap-16">
+        <div class="flex flex-col gap-8 w-full items-center">
+            <p class="text-6xl">All Products</p>
+
+            <div class="flex gap-2">
+                <a
+                    href="{% url 'products:show_create_product' %}"
+                    class="border border-black text-white bg-black hover:opacity-40 duration-200 p-2"
+                >
+                    Add Your Product
+                </a>
+
+                <button
+                    type="button"
+                    onclick="showModal()"
+                    class="border border-black text-white bg-black hover:opacity-40 duration-200 p-2"
+                >
+                    Add Your Product by AJAX
+                </button>
+            </div>
+        </div>
+
+        <div
+            id="product-grid"
+            class="grid grid-cols-4 gap-4 mx-auto max-w-6xl w-full"
+        ></div>
+
+        <div id="empty-state" class="hidden flex h-72 items-center justify-center">
+            <p class="text-black/40">No Products Yet</p>
+        </div>
+    </main>
+
+    {% block script %}
+        <script>
+            const PRODUCTS_API_ENDPOINT = "{% url 'products:show_products_json' %}";
+            const CURRENT_USER_ID = "{{ user.id|default_if_none:'' }}";
+
+            const productGridContainer = document.getElementById("product-grid");
+            const emptyStateDisplay = document.getElementById("empty-state");
+
+            function buildProductCardElement(product) {
+                const productCardContainer = document.createElement("div");
+                productCardContainer.className =
+                    "h-72 overflow-hidden col-span-1 relative rounded-lg shadow-lg";
+
+                const detailLink =
+                    `{% url 'products:show_product' '00000000-0000-0000-0000-000000000000' %}`.replace(
+                        "00000000-0000-0000-0000-000000000000",
+                        product.id
+                    );
+                const editLink =
+                    `{% url 'products:show_edit_product' '00000000-0000-0000-0000-000000000000' %}`.replace(
+                        "00000000-0000-0000-0000-000000000000",
+                        product.id
+                    );
+                const deleteLink =
+                    `{% url 'products:show_delete_product' '00000000-0000-0000-0000-000000000000' %}`.replace(
+                        "00000000-0000-0000-0000-000000000000",
+                        product.id
+                    );
+
+                const editDeleteButtons =
+                    CURRENT_USER_ID &&
+                    Number(CURRENT_USER_ID) === Number(product.user_id)
+                        ? `<div class="flex gap-2">
+                                        <a href="${editLink}"><button class="bg-blue-500 p-2 text-sm text-white hover:bg-white hover:text-blue-500 duration-200">Edit</button></a>
+                                        <a href="${deleteLink}"><button class="bg-red-500 p-2 text-sm text-white hover:bg-white hover:text-red-500 duration-200">Delete</button></a>
+                                    </div>`
+                        : "";
+
+                const cardHtml = `
+                                    <img src="${product.thumbnail}" alt="${product.name}" class="absolute z-0 w-full h-full object-cover" />
+                                    <div class="absolute z-10 h-full w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-between p-4">
+                                        <div>${editDeleteButtons}</div>
+                                        <div class="w-full flex justify-between items-end">
+                                            <div class="flex flex-col">
+                                                <h3 class="text-2xl font-semibold text-white">${product.name}</h3>
+                                                <p class="text-green-400 text-lg font-bold mt-1">$${product.price}</p>
+                                            </div>
+                                            <a href="${detailLink}"><button class="bg-green-400 p-2 text-white hover:bg-white hover:text-green-400 duration-200">Details</button></a>
+                                        </div>
+                                    </div>`;
+                productCardContainer.innerHTML = cardHtml;
+                return productCardContainer;
+            }
+
+            function renderProductCards(products) {
+                productGridContainer.innerHTML = "";
+                products.forEach((product) => {
+                    const cardElement = buildProductCardElement(product);
+                    productGridContainer.appendChild(cardElement);
+                });
+            }
+
+            async function fetchProducts() {
+                try {
+                    const response = await fetch(PRODUCTS_API_ENDPOINT);
+                    if (!response.ok) throw new Error("Network response was not ok");
+                    const products = await response.json();
+
+                    if (products && products.length > 0) {
+                        productGridContainer.classList.remove("hidden");
+                        emptyStateDisplay.classList.add("hidden");
+                        renderProductCards(products);
+                    } else {
+                        productGridContainer.classList.add("hidden");
+                        emptyStateDisplay.classList.remove("hidden");
+                    }
+                } catch (error) {
+                    console.error("Error fetching products:", error);
+                    productGridContainer.innerHTML =
+                        '<p class="text-red-500 col-span-4 text-center">Could not load products.</p>';
+                }
+            }
+
+            document.addEventListener("DOMContentLoaded", fetchProducts);
+
+            document.addEventListener("productAdded", function () {
+                fetchProducts();
+            });
+        </script>
+    {% endblock %} 
+{% endblock %}

@@ -3,55 +3,47 @@
 {% load static %}
 
 {% block content %}
-    {% include 'partials/navbar.html' %}
+    <main class="min-h-dvh w-full">
+        <section class="h-[75dvh] w-full overflow-hidden relative">
+            <img class="w-full h-full object-cover" src="{% static 'image/football_field.png' %}" alt="football field">
 
-    <main class="relative flex justify-center w-full min-h-dvh flex-col">
-
-        <section class="relative border-b h-[75dvh] w-full overflow-hidden w-full mt-16">
-            <img class="absolute w-full h-full object-cover" src="{% static 'images/football_field.png' %}" alt="Football Field" >
-        
-            <div class="absolute inset-0 z-10 flex">
-                <div class="max-w-6xl mx-auto w-full flex justify-center flex-col gap-8">
-                    <div class="flex flex-col gap-2">
-                        <p class="text-white text-6xl">Your one stop shop</p>
-                        <p class="text-white text-6xl">for your <span class="text-green-400">kicking</span> needs</p>
-                    </div>
+            <div class="absolute inset-0 h-full flex flex-col gap-8 text-white justify-center max-w-6xl w-full mx-auto">
+                <div class="flex flex-col gap-4">
+                    <p class="text-6xl">
+                        Your one stop shop
+                    </p>
                     
-                    <a href="{% url 'main:show_products' %}">
-                        <button class="bg-black text-white p-4 w-32">
+                    <p class="text-6xl">
+                        For your <span class="text-green-400">kicking</span> needs
+                    </p>
+                </div>
+
+                <div class="w-full">
+                    <a href="{% url 'products:show_products' %}">
+                        <button class="bg-black p-4 hover:bg-white hover:text-black duration-200">
                             See All Products
                         </button>
                     </a>
                 </div>
             </div>
         </section>
+        
+        <section class="h-[75dvh] w-full flex items-center justify-center flex-col gap-12">
+            {% if products %}
+                <p class="text-4xl">Featured Products</p>
 
-        <section class="min-h-[75dvh] w-full flex items-center justify-center flex-col gap-20">
-            <div class="text-4xl font-bold">
-                Featured Products
-            </div>
+                <div class="grid grid-cols-4 w-full max-w-6xl mx-auto gap-4">
+                    {% for product in products %}
+                        {% include 'partials/featured_card.html' with product=product %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-4xl">Featured Products</p>
 
-            <div class="grid grid-cols-4 w-full max-w-6xl mx-auto gap-4">
-                {% for product in products %}
-                    {% if product.is_featured %}
-                        {% include 'partials/product_card.html' with product=product %}
-                    {% endif %}
-                {% endfor %}
-            </div>
+                <div class="h-64 flex items-center justify-center">
+                    <p class="text-black/40">No Products Yet</p>
+                </div>
+            {% endif %}
         </section>
-
-        <!-- <div class="mt-24">
-            <div>
-                <p>
-                    Made by: {{ name }} from {{ class }}
-                </p>
-                
-                <h5>Last login session: {{ last_login }}</h5>
-                
-                <h5>Current user: {{ current_user }}</h5>
-            </div>
-
-        <hr> -->
-
-    {% include 'partials/footer.html' %}
+    </main>
 {% endblock content %}

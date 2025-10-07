@@ -1,0 +1,41 @@
+<div class="h-72 overflow-hidden col-span-1 relative rounded-lg shadow-lg">
+    <img src="{{ product.thumbnail }}" alt="{{ product.name }}" class="absolute z-0 w-full h-full object-cover" />
+
+    <div class="absolute z-10 h-full w-full bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-between p-4">
+        <div>
+            {% if user.is_authenticated and product.user == user %}
+                <div class="flex gap-2">
+                    <a href="{% url 'products:show_edit_product' product.id %}">
+                        <button class="bg-blue-500 p-2 text-sm text-white hover:bg-white hover:text-blue-500 duration-200">
+                            Edit
+                        </button>
+                    </a>
+                    
+                    <a href="{% url 'products:show_delete_product' product.id %}">
+                        <button class="bg-red-500 p-2 text-sm text-white hover:bg-white hover:text-red-500 duration-200">
+                            Delete
+                        </button>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="w-full flex justify-between items-end">
+            <div class="flex flex-col">
+                <h3 class="text-2xl font-semibold text-white">
+                    {{ product.name }}
+                </h3>
+                
+                <p class="text-green-400 text-lg font-bold mt-1">
+                    ${{ product.price }}
+                </p>
+            </div>
+            
+            <a href="{% url 'products:show_product' product.id %}">
+                <button class="bg-green-400 p-2 text-white hover:bg-white hover:text-green-400 duration-200">
+                    Details
+                </button>
+            </a>
+        </div>
+    </div>
+</div>

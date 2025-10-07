@@ -1,0 +1,19 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+    <main class="pt-16">
+        <form method="POST">
+            {% csrf_token %}
+
+            {% for field in form %}
+                <div class="field-container">
+                    {{ field.label }}
+
+                    {{ field }}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="border border-black">Add Product</button>
+        </form>
+    </main>
+{% endblock %}

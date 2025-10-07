@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <main class="min-h-dvh w-full flex items-center justify-center">
+        <div class="grid pt-16 max-w-6xl mx-auto w-full flex items-center justify-center h-full grid-cols-2 gap-8">
+            <div class="col-span-1 overflow-hidden h-full flex flex-col gap-4">
+                <img src="{{ product.thumbnail }}" alt="{{ product.name }}" class="w-full h-96 object-cover" />
+
+                Seller: {{ product.user }}
+            </div>
+            
+            <div class="col-span-1 h-full flex flex-col gap-6">
+                <div class="flex flex-col gap-2">
+                    <p class="text-6xl">{{ product.name }}</p>
+
+                    <p class="text-2xl text-black/40">{{ product.category }}</p>
+                </div>
+
+                <p class="text-3xl font-bold">
+                    $ {{ product.price }}
+                </p>
+
+                <p class="font-extralight">
+                    {{ product.description }}
+                </p>
+
+                <div class="flex flex-col gap-4">
+                    <button class="p-2 bg-black text-white border border-black hover:opacity-40 duration-200">
+                        Add to Bag
+                    </button>
+                    
+                    <button class="p-2 border border-black hover:opacity-40 duration-200">
+                        Add to Wishlist
+                    </button>
+                </div>
+
+                <a class="underline hover:opacity-40" href="{% url 'products:show_products' %}">
+                    <span class="text-xl">↖</span> Back to products list
+                </a>
+            </div>
+        </div>
+    </main>
+{% endblock content %}
