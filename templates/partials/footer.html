@@ -1,13 +1,9 @@
 <footer class="h-16 bg-black flex text-white items-center justify-center gap-8">
     <p>
-        Made by {{ name }} from {{ class }}
+        Made by Valerian Hizkia Emmanuel from PBP E
     </p>
 
-    <p>
-        Last login session: null
-    </p>
-
-    <p>
-        Current user: null
-    </p>
+    {% if user.is_authenticated %}
+        Last login session: {{ last_login }}
+    {% endif %}
 </footer>
