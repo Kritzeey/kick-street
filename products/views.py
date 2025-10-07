@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from products.forms import ProductForm
 from products.models import Product
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.core import serializers
 from django.contrib.auth.decorators import login_required
 
@@ -73,3 +74,27 @@ def show_product(request, product_id):
     }
     
     return render(request, "product_detail.html", context)
+
+def show_edit_product(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+
+    form = ProductForm(request.POST or None, instance=product)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+
+        return redirect("main:show_main")
+    
+    context = { 
+        "form": form,
+        "last_login": request.COOKIES.get("last_login", "Never"),
+    }
+
+    return render(request, "edit_product.html", context)
+
+def show_delete_product(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+
+    product.delete()
+    
+    return HttpResponseRedirect(reverse("main:show_main"))
