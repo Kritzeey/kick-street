@@ -6,6 +6,41 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.core import serializers
 from django.contrib.auth.decorators import login_required
 
+from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from .models import Product
+from django.contrib.auth.decorators import login_required
+
+@csrf_exempt
+@require_POST
+def create_product_ajax(request):
+    name = request.POST.get("name")
+    price = request.POST.get("price")
+    description = request.POST.get("description")
+    thumbnail = request.POST.get("thumbnail")
+    category = request.POST.get("category")
+    stock = request.POST.get("stock")
+    brand = request.POST.get("brand")
+    is_featured = request.POST.get("is_featured") == 'on'
+    user = request.user
+
+    new_product = Product(
+        name=name,
+        price=price,
+        description=description,
+        thumbnail=thumbnail,
+        category=category,
+        stock=stock,
+        brand=brand,
+        is_featured=is_featured,
+        user=user
+    )
+    
+    new_product.save()
+
+    return HttpResponse(b"CREATED", status=201)
+
 @login_required(login_url="/login")
 def show_create_product(request):
     form = ProductForm(request.POST or None)
