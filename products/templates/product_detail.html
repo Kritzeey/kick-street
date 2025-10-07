@@ -32,6 +32,10 @@
                     </button>
                 </div>
 
+                <p>
+                    Seller: {{ product.user }}
+                </p>
+
                 <a class="underline hover:opacity-40" href="{% url 'products:show_products' %}">
                     <span class="text-xl">↖</span> Back to products list
                 </a>

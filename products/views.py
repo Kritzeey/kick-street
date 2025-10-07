@@ -65,7 +65,7 @@ def show_products(request):
     return render(request, "products.html", context)
 
 def show_product(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
+    product = get_object_or_404(Product, pk=product_id)
 
     context = { 
         "product": product,
