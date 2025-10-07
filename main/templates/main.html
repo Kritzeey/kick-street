@@ -3,8 +3,6 @@
 {% load static %}
 
 {% block content %}
-    {% include 'partials/navbar.html' %}
-
     <main class="min-h-dvh w-full">
         <section class="h-[75dvh] w-full overflow-hidden relative">
             <img class="w-full h-full object-cover" src="{% static 'image/football_field.png' %}" alt="football field">
@@ -21,9 +19,11 @@
                 </div>
 
                 <div class="w-full">
-                    <button class="bg-black p-4 hover:bg-white hover:text-black duration-200">
-                        See All Products
-                    </button>
+                    <a href="{% url 'products:show_products' %}">
+                        <button class="bg-black p-4 hover:bg-white hover:text-black duration-200">
+                            See All Products
+                        </button>
+                    </a>
                 </div>
             </div>
         </section>
@@ -33,7 +33,7 @@
 
                 <div class="grid grid-cols-4 w-full max-w-6xl mx-auto gap-4">
                     {% for product in products %}
-                        {% include 'partials/product_card.html' with product=product %}
+                        {% include 'partials/featured_card.html' with product=product %}
                     {% endfor %}
                 </div>
             {% else %}
@@ -45,6 +45,4 @@
             {% endif %}
         </section>
     </main>
-
-    {% include 'partials/footer.html' %}
 {% endblock content %}

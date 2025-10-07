@@ -12,7 +12,12 @@ def show_create_product(request):
 
         return redirect("main:show_main")
     
-    context = { "form": form }
+    context = { 
+        "form": form,
+        "app_name": "Kick Street",
+        "name": "Valerian Hizkia Emmanuel",
+        "class": "PBP E",
+    }
 
     return render(request, "create_product.html", context)
 
@@ -43,3 +48,15 @@ def show_product_xml_by_id(request, product_id):
     data = serializers.serialize("xml", [product])
 
     return HttpResponse(data, content_type="application/xml")
+
+def show_products(request):
+    products = Product.objects.all()
+
+    context = { 
+        "app_name": "Kick Street",
+        "name": "Valerian Hizkia Emmanuel",
+        "class": "PBP E",
+        "products": products, 
+    }
+
+    return render(request, "products.html", context)
