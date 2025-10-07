@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from products.forms import ProductForm
 from products.models import Product
 from django.http import HttpResponse
@@ -60,3 +60,15 @@ def show_products(request):
     }
 
     return render(request, "products.html", context)
+
+def show_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+
+    context = { 
+        "app_name": "Kick Street",
+        "name": "Valerian Hizkia Emmanuel",
+        "class": "PBP E",
+        "product": product, 
+    }
+    
+    return render(request, "product_detail.html", context)
