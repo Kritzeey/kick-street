@@ -32,7 +32,7 @@ PRODUCTION = os.getenv('PRODUCTION', 'False').lower == 'true'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'valerian-hizkia-kick-street.pbp.cs.ui.ac.id']
 
 
 # Application definition
@@ -79,6 +79,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'kick_street.wsgi.application'
 
+CSRF_TRUSTED_ORIGINS = ['https://valerian-hizkia-kick-street.pbp.cs.ui.ac.id']
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
