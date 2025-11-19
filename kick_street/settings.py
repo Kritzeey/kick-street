@@ -89,7 +89,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'kick_street.wsgi.application'
 
-CSRF_TRUSTED_ORIGINS = ['https://valerian-hizkia-kick-street.pbp.cs.ui.ac.id']
+CSRF_TRUSTED_ORIGINS = ['https://valerian-hizkia-kick-street.pbp.cs.ui.ac.id', 'http://127.0.0.1', 'http://localhost']
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
