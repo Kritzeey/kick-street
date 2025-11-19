@@ -5,12 +5,15 @@ from products.models import Product
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.core import serializers
 from django.contrib.auth.decorators import login_required
-
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from .models import Product
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.html import strip_tags
+import json
+from django.http import JsonResponse
 
 @csrf_exempt
 @require_POST
@@ -149,3 +152,34 @@ def show_delete_product(request, product_id):
     product.delete()
     
     return HttpResponseRedirect(reverse("main:show_main"))
+
+@csrf_exempt
+def create_product_flutter(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        name = strip_tags(data.get("name", ""))  # Strip HTML tags
+        price = data.get("price", "")
+        description = strip_tags(data.get("description", ""))  # Strip HTML tags
+        thumbnail = data.get("thumbnail", "")
+        category = data.get("category", "")
+        stock = data.get("stock", "")
+        brand = data.get("brand", "")
+        is_featured = data.get("is_featured", False)
+        user = request.user
+        
+        new_news = Product(
+            name=name, 
+            price=price,
+            description=description,
+            thumbnail=thumbnail,
+            category=category,
+            stock=stock,
+            brand=brand,
+            is_featured=is_featured,
+            user=user
+        )
+        new_news.save()
+        
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)
